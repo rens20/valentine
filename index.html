@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine's Day</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <style>
+        body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  text-align: center;
+}
+
+.emoji {
+  font-size: 3rem;
+  margin: 20px;
+}
+
+.buttons {
+  padding: 10px 20px;
+  font-size: 1rem;
+  margin: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.no{
+    background-color: rgb(255, 21, 21);
+    padding: 10px 20px;
+  font-size: 1rem;
+  margin: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  color:white
+}
+.yes{
+    background-color: rgb(7, 139, 67);
+    padding: 10px 20px;
+  font-size: 1rem;
+  margin: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  color:white
+}
+
+
+.buttons button:focus {
+  outline: none;
+}
+
+.no:hover {
+  background-color: #ff0000;
+}
+.falling-heart {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 2rem;
+  color: red;
+  animation: fallAnimation 3s linear forwards;
+}
+
+@keyframes fallAnimation {
+  0% {
+    transform: translateY(-100vh);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(100vh);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 1;
+  }
+}
+.falling-tear {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 2rem;
+  animation: fallAnimation 3s linear forwards;
+}
+
+@keyframes fallAnimation {
+  0% {
+    transform: translateY(-100vh);
+    opacity: 1;
+  }
+  500% {
+    transform: translateY(100vh);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 1;
+  }
+}
+
+
+    </style>
+<div class="container">
+  <h1>Will You Be My Valentine?</h1>
+  <div class="emoji" id="emoji">&#x1F48D;</div>
+  <div class="buttons">
+    <button class="no" onclick="noClicked()">No</button>
+    <button class="yes" onclick="yesClicked()">Yes</button>
+  </div>
+</div>
+
+<script>
+function yesClicked() {
+  document.getElementById("emoji").innerHTML = "&#x1F618;";
+  createFallingHearts();
+}
+
+function noClicked() {
+  document.getElementById("emoji").innerHTML = "&#x1F622;";
+  createFallingTears();
+}
+
+function createFallingHearts() {
+  const numHearts = 100; // Number of hearts to create
+  const container = document.createElement("div");
+  container.classList.add("falling-hearts-container");
+
+  for (let i = 0; i < numHearts; i++) {
+    const heart = document.createElement("div");
+    heart.innerHTML = "&#x2764;&#xFE0F;";
+    heart.classList.add("falling-heart");
+    container.appendChild(heart);
+  }
+
+  document.body.appendChild(container);
+
+  // Randomly position each heart and animate
+  const hearts = document.querySelectorAll(".falling-heart");
+  hearts.forEach((heart) => {
+    const randomX = Math.random() * window.innerWidth;
+    const randomDelay = Math.random() * 3; // Random delay for staggered animation
+    heart.style.left = randomX + "px";
+    heart.style.animationDelay = randomDelay + "s";
+  });
+
+  // Remove hearts after animation ends
+  container.addEventListener("animationend", () => {
+   // container.remove();
+  });
+}
+
+function createFallingTears() {
+  const numTears = 100; // Number of tears to create
+  const container = document.createElement("div");
+  container.classList.add("falling-tears-container");
+
+  for (let i = 0; i < numTears; i++) {
+    const tear = document.createElement("div");
+    tear.innerHTML = "&#x1F622;";
+    tear.classList.add("falling-tear");
+    container.appendChild(tear);
+  }
+
+  document.body.appendChild(container);
+
+  // Randomly position each tear and animate
+  const tears = document.querySelectorAll(".falling-tear");
+  tears.forEach((tear) => {
+    const randomX = Math.random() * window.innerWidth;
+    const randomDelay = Math.random() * 3; // Random delay for staggered animation
+    tear.style.left = randomX + "px";
+    tear.style.animationDelay = randomDelay + "s";
+  });
+
+  // Remove tears after animation ends
+  container.addEventListener("animationend", () => {
+  //container.remove();
+  });
+}
+
+</script>
+</body>
+</html>
